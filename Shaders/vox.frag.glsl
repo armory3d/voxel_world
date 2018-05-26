@@ -28,7 +28,7 @@ void main() {
 
 #ifdef _Deferred
 	fragColor[0] = vec4(n.xy, packFloat(0.0, 1.0), 1.0 - gl_FragCoord.z);
-	fragColor[1] = vec4(col, occ);
+	fragColor[1] = vec4(col, packFloat2(occ, 0.0));
 #else
 	fragColor = vec4(col, 1.0);
 #endif
