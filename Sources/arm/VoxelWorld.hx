@@ -11,6 +11,7 @@ class VoxelWorld extends iron.Trait {
 	public static inline var size = 64;
 
 	static var p = new Perlin();
+	static var b:haxe.io.Bytes;
 
 	public function new() {
 		super();
@@ -134,7 +135,7 @@ class VoxelWorld extends iron.Trait {
 			instancedData = cast(object, iron.object.MeshObject).data.geom.instancedVB.lock();
 
 			// 3D texture for voxel AO
-			var b = haxe.io.Bytes.alloc(s * s * s);
+			b = haxe.io.Bytes.alloc(s * s * s);
 			for (i in 0...b.length) {
 				b.set(i, instancedData[i * 3] == 0 ? 0 : 255);
 			}
@@ -143,7 +144,7 @@ class VoxelWorld extends iron.Trait {
 		});
 	}
 
-	public static function textureLink(link:String):kha.Image {
+	public static function textureLink(object:iron.object.Object, mat:MaterialData, link:String):kha.Image {
 		if (link == "_volume") return voxelImage;
 		return null;
 	}
