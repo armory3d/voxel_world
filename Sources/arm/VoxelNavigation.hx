@@ -64,7 +64,7 @@ class VoxelNavigation extends Trait {
 		if (!enabled || Input.occupied) return;
 
 		if (mouse.started() && !mouse.locked) mouse.lock();
-		else if (keyboard.started("esc") && mouse.locked) mouse.unlock();
+		else if (keyboard.started("escape") && mouse.locked) mouse.unlock();
 
 		var moveForward = keyboard.down(keyUp) || keyboard.down("up");
 		var moveBackward = keyboard.down(keyDown) || keyboard.down("down");

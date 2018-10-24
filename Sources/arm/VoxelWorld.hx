@@ -57,7 +57,7 @@ class VoxelWorld extends iron.Trait {
 					cull_mode: "clockwise",
 					depth_write: true,
 					constants: [
-						{ name: "LWVP", type: "mat4", link: "_lampWorldViewProjectionMatrix" },
+						{ name: "LWVP", type: "mat4", link: "_lightWorldViewProjectionMatrix" },
 						{ name: "s", type: "int" },
 						{ name: "s2", type: "int" }
 					],
@@ -131,7 +131,7 @@ class VoxelWorld extends iron.Trait {
 			}
 
 			// Setup instanced rendering
-			cast(object, iron.object.MeshObject).data.geom.setupInstanced(instancedData, kha.graphics4.Usage.DynamicUsage);
+			cast(object, iron.object.MeshObject).data.geom.setupInstanced(instancedData, 1, kha.graphics4.Usage.DynamicUsage);
 			instancedData = cast(object, iron.object.MeshObject).data.geom.instancedVB.lock();
 
 			// 3D texture for voxel AO
