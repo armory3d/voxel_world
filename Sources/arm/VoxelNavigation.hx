@@ -102,10 +102,10 @@ class VoxelNavigation extends Trait {
 				move(dir, d);
 
 				if (rightStickX) {
-					camera.rotate(Vec4.zAxis(), -gamepad.rightStick.x / 15.0);
+					camera.transform.rotate(Vec4.zAxis(), -gamepad.rightStick.x / 15.0);
 				}
 				if (rightStickY) {
-					camera.rotate(camera.right(), gamepad.rightStick.y / 15.0);
+					camera.transform.rotate(camera.right(), gamepad.rightStick.y / 15.0);
 				}
 			}
 		}
@@ -142,8 +142,8 @@ class VoxelNavigation extends Trait {
 		if (d > 0.0) move(dir, d);
 
 		if (mouse.locked) {
-			camera.rotate(Vec4.zAxis(), -mouse.movementX / 200);
-			camera.rotate(camera.right(), -mouse.movementY / 200);
+			camera.transform.rotate(Vec4.zAxis(), -mouse.movementX / 200);
+			camera.transform.rotate(camera.right(), -mouse.movementY / 200);
 		}
 
 		// Voxels
@@ -163,12 +163,12 @@ class VoxelNavigation extends Trait {
 		    z >= 2 && z < s + 2) {
 			var i = (x + y * s + (z - 2) * s * s) * 3;
 			var a = VoxelWorld.instancedData;
-			if (a[i] == 0) camera.move(new Vec4(0, 0, -1), 0.15);
+			if (a[i] == 0) camera.transform.move(new Vec4(0, 0, -1), 0.15);
 		}
 		if (x >= 0 && x < s &&
 		    y >= 0 && y < s &&
 		    z >= s + 2) {
-			camera.move(new Vec4(0, 0, -1), 0.15);
+			camera.transform.move(new Vec4(0, 0, -1), 0.15);
 		}
 
 		// Jump
@@ -188,7 +188,7 @@ class VoxelNavigation extends Trait {
 			else jump = 0.5; // Always jump when out of volume
 		}
 		if (jump > 0) {
-			camera.move(new Vec4(0,0,1), jump);
+			camera.transform.move(new Vec4(0,0,1), jump);
 			jump -= 0.03;
 		}
 	}
@@ -318,7 +318,7 @@ class VoxelNavigation extends Trait {
 		var vv = new Vec4();
 		vv.setFrom(dir);
 		vv.z = 0;
-		camera.move(vv, d);
+		camera.transform.move(vv, d);
 	}
 
 	#if arm_azerty
