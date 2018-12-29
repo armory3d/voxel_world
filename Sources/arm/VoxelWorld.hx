@@ -64,7 +64,7 @@ class VoxelWorld extends iron.Trait {
 					texture_units: [],
 					vertex_elements: [
 						{ name: "pos", data: 'short4norm' },
-						{ name: "off", data: 'float3' }
+						{ name: "ipos", data: 'float3' }
 					]
 				}
 			]
