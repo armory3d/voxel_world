@@ -42,11 +42,11 @@ class VoxelWorld extends iron.Trait {
 						{ name: "tileset" },
 						{ name: "volume", link: "_volume" }
 					],
-					vertex_structure: [
-						{ name: "pos", size: 3 },
-						{ name: "nor", size: 3 },
-						{ name: "tex", size: 2 },
-						{ name: "off", size: 3 }
+					vertex_elements: [
+						{ name: "pos", data: 'short4norm' },
+						{ name: "nor", data: 'short2norm' },
+						{ name: "tex", data: 'short2norm' },
+						{ name: "ipos", data: 'float3' }
 					]
 				},
 				{
@@ -62,11 +62,9 @@ class VoxelWorld extends iron.Trait {
 						{ name: "s2", type: "int" }
 					],
 					texture_units: [],
-					vertex_structure: [
-						{ name: "pos", size: 3 },
-						{ name: "nor", size: 3 },
-						{ name: "tex", size: 2 },
-						{ name: "off", size: 3 }
+					vertex_elements: [
+						{ name: "pos", data: 'short4norm' },
+						{ name: "off", data: 'float3' }
 					]
 				}
 			]

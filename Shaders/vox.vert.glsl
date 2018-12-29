@@ -2,10 +2,10 @@
 
 #include "../compiled.inc"
 
-in vec3 pos;
-in vec3 nor;
+in vec4 pos;
+in vec2 nor;
 in vec2 tex;
-in vec3 off;
+in vec3 ipos;
 
 uniform mat4 WVP;
 uniform int s;
@@ -20,14 +20,14 @@ out float occ;
 
 void main() {
 
-	if (off.x == 0.0) {
+	if (ipos.x == 0.0) {
 		gl_Position.x = -1000;
 		gl_Position.y = -1000;
 		return;
 	}
 
-	tc = tex + off.xy;
-	normal = nor;
+	tc = tex + ipos.xy;
+	normal = vec3(nor.xy, pos.w);
 
 	int i = gl_InstanceID % s2;
 	ivec3 pi;
@@ -36,14 +36,14 @@ void main() {
 	pi.z = int(gl_InstanceID / s2);
 
 #ifdef _Deferred
-	ivec3 posn = ivec3(pos * 2.1);
+	ivec3 posn = ivec3(pos.xyz * 2.1);
 
 	float a;
 	float b;
 	float c = texelFetch(volume, ivec3(pi.x + posn.x, pi.y + posn.y, pi.z + posn.z), 0).r;;
 
 	// Unify this..
-	if (abs(nor.z) > 0.1) {
+	if (abs(pos.w) > 0.1) { // nor.z
 		a = texelFetch(volume, ivec3(pi.x + posn.x, pi.y,          pi.z + posn.z), 0).r;
 		b = texelFetch(volume, ivec3(pi.x,          pi.y + posn.y, pi.z + posn.z), 0).r;
 	}
@@ -60,5 +60,5 @@ void main() {
 	occ = max(occ, 0.2);
 #endif
 
-	gl_Position = WVP * vec4(pos + pi, 1.0);
+	gl_Position = WVP * vec4(pos.xyz + pi, 1.0);
 }
