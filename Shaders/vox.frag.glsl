@@ -27,7 +27,7 @@ void main() {
 	vec3 col = texture(tileset, tc).rgb;
 
 #ifdef _Deferred
-	fragColor[0] = vec4(n.xy, 1.0, packFloatInt16(0.0, 0, 4));
+	fragColor[0] = vec4(n.xy, 1.0, packFloatInt16(0.0, 0));
 	fragColor[1] = vec4(col, packFloat2(occ, 0.0));
 #else
 	fragColor = vec4(col, 1.0);
